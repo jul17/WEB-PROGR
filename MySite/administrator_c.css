@@ -1,0 +1,25 @@
+@import 'style.css';
+
+img {
+    float: left;
+}
+
+.btn {
+    float: right;
+    margin-bottom: 20px;
+}
+
+.input-form {
+    display: flex;
+}
+
+#newsForm {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#addPicture {
+    float: right;
+    margin-top: 200px;
+    margin-bottom: 0px;
+}

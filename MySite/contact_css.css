@@ -1,0 +1,29 @@
+@import 'style.css';
+
+.main-text {
+    font-size: 20px;
+}
+
+#map {
+    width: 500px;
+    height: 400px;
+    right: 0;
+}
+
+.map_border{
+	text-align:right;
+	height:500px;
+	width:418px;
+    float: right;
+    margin-left: 400px;	  
+}
+          
+.gmap {
+			
+ 	overflow:hidden;
+ 	background:none!important;
+	height:500px;
+	width:418px;
+
+
+}

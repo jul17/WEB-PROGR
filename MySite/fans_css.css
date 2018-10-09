@@ -1,0 +1,10 @@
+@import 'style.css';
+
+
+.nick_name{
+  text-align: right;
+    float: right;
+    font-weight: bold;
+    font-size: 18px;
+}
+
