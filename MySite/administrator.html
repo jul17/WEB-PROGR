@@ -15,14 +15,14 @@
 <body>
       <div class="mybar">
     <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-image: linear-gradient(to right top, #000000, #1e171c, #2f2836, #383e55, #345672);">
-            <a class="navbar-brand" href="file:///C:/IOT2018/II/Web2018/WEB%20PROGR/MySite/bootstrap.html">Main</a>
+             <a class="navbar-brand" href="./index.html">Main</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="file:///C:/IOT2018/II/Web2018/WEB%20PROGR/MySite/news.html">News</a>
+                    <a class="nav-item nav-link" href="./news.html">News</a>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -35,9 +35,9 @@
                             <a class="dropdown-item" href="#">Most famous</a>
                         </div>
                     </li>
-                    <a class="nav-item nav-link" href="#">Fans</a>
-                    <a class="nav-item nav-link" href="#">Contacts</a>
-                    <a class="nav-item nav-link" href="#">Admin</a>
+                    <a class="nav-item nav-link" href="./fans.html">Fans</a>
+                    <a class="nav-item nav-link" href="./contacts.html">Contacts</a>
+                    <a class="nav-item nav-link" href="./administrator.html">Admin</a>
                 </div>
             </div>
             <div class="form-inline my-2 my-lg-0">
@@ -49,32 +49,33 @@
 
   <div class= "container">
 <div class="container">
-        <div class="main-text">
-            <h2 style="text-align: center;">Add news</h2>
+                    
 
-            <div class="input_form">
-
-            <div class="col-md-6">
-                <img src="images/News.gif" width="60%">
-            </div>
-
-            <form id="addPicture">
-                <label>Choose the image</label>
-                <input id="news-img" type="file" class="form-control-file">
-            </form>
-            </div>
-
-            <div class="col-md-12">
-                <form id="newsForm">
-                    <input id="caption" type="text" class="form-control" placeholder="Titele">
-                    <br>
-                    <textarea id="text" class="form-control" rows="15" placeholder="News"></textarea>
-                    <br>
-                    <input type="button" value="Надіслати" class="btn btn-primary" onclick="newsAdd()">
-                </form>
-            </div>
-
+            <h1 class="text-center">Add news</h1>
+        
+        <div class="form-container">
+          <form>
+          <div class="form-group">
+            <label for="exampleFormControlFile1">Upload image</label>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+          </div>
+          </form>
         </div>
+        
+        <div class="form-container">
+            <form>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Add Title</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                </div>
+                 <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Body</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
+                 </div>
+                 <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    
 
 </div>
     

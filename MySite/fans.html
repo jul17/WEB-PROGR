@@ -16,14 +16,14 @@
 <body>
       <div class="mybar">
     <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-image: linear-gradient(to right top, #000000, #1e171c, #2f2836, #383e55, #345672);">
-            <a class="navbar-brand" href="file:///C:/IOT2018/II/Web2018/WEB%20PROGR/MySite/bootstrap.html">Main</a>
+            <a class="navbar-brand" href="./index.html">Main</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="file:///C:/IOT2018/II/Web2018/WEB%20PROGR/MySite/news.html">News</a>
+                    <a class="nav-item nav-link" href="./news.html">News</a>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -36,9 +36,9 @@
                             <a class="dropdown-item" href="#">Most famous</a>
                         </div>
                     </li>
-                    <a class="nav-item nav-link" href="file:///C:/IOT2018/II/Web2018/WEB%20PROGR/MySite/fans.html">Fans</a>
-                    <a class="nav-item nav-link" href="#">Contacts</a>
-                    <a class="nav-item nav-link" href="#">Admin</a>
+                    <a class="nav-item nav-link" href="./fans.html">Fans</a>
+                    <a class="nav-item nav-link" href="./contacts.html">Contacts</a>
+                    <a class="nav-item nav-link" href="./administrator.html">Admin</a>
                 </div>
             </div>
             <div class="form-inline my-2 my-lg-0">
@@ -66,23 +66,19 @@
           <div style="border: 1px black solid"></div>
     <div style="border: 1px black solid">
       </div>
+<div class="form-container">
+<form action="preventDefault()">
 
-<form id="form">
-                <h4 style="margin-top: 30px;">Wright appeal</h4>
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <input id="name" type="text" class="form-control" placeholder="Nick name">
-                    </div>
-                    <br><br>
-                    <div class="col-xs-12">
-                        <textarea id="text" class="form-control" rows="7" placeholder="Text of the appeal" ></textarea>
-                        <br>
-                        <input type="button" value="Send" class="btn btn-primary" onclick="addResponse(null);">
+               <div class="form-group">
+          <label for="exampleFormControlTextarea1">Add feedback</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                     </div>
                 </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    
             </form>
 </div>
-
+</div>
 <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
