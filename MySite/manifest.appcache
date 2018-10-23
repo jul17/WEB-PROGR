@@ -1,0 +1,31 @@
+CACHE MANIFEST
+# v1.0.2
+
+CACHE:
+contacts.html
+competitions.html
+news.html
+administrator.html
+fans.html
+styles.css
+contact_css.css
+images/back-main.png
+images/logo.png
+images/background.png
+images/girl.jpg
+images/new1.png
+images/new2.png
+images/new3.png
+images/new4.png
+images/News.png
+
+https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css
+https://code.jquery.com/jquery-3.3.1.slim.min.js
+https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js
+https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js
+
+NETWORK:
+*
+
+FALLBACK:
+/fans.html /error.html
