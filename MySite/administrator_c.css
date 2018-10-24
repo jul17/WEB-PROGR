@@ -2,10 +2,11 @@
 
 img {
     float: left;
+    margin-bottom: 10px;
 }
 
 .btn {
-    float: right;
+    float: right; 
     margin-bottom: 20px;
 }
 
@@ -22,4 +23,5 @@ img {
     float: right;
     margin-top: 200px;
     margin-bottom: 0px;
+    z-index: 20;
 }
