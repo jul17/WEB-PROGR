@@ -1,9 +1,12 @@
+window.isOnline = () => this.navigator.onLine;
 const getById = id => document.getElementById(id);
 
 const input_form = getById('addPicture');
 const newsForm = getById('newsForm')
 const text = getById('text');
 const caption = getById('caption') 
+
+const fileInput = getById('formForFile');
 
 const onSubmitPress = (e) => {
   e.preventDefault();
@@ -14,6 +17,16 @@ const onSubmitPress = (e) => {
 
   if (!isValid) return;
 
+  if (!isOnline()) {
+    writeLocally({
+      title: caption.value,
+      body: text.value,
+      picture: fileInput.value
+    });
+  } else {
+    console.log('Емуляція запиту до сервера...');
+  }
+
   input_form.classList.remove('was-validated');
   newsForm.classList.remove('was-validated');
   input_form.reset();
@@ -21,8 +34,6 @@ const onSubmitPress = (e) => {
 
   alert('Your news added!');
 }
-
-const fileInput = getById('formForFile')
 
 function readURL(input) {
 
@@ -40,6 +51,14 @@ function readURL(input) {
 $("#formForFile").change(function() {
   readURL(this);
 });
+
+const writeLocally = (obj) => {
+  const items = localStorage.getItem('news_data')
+
+  let data = items ? JSON.parse(items) : [];
+  data.push(obj);
+  localStorage.setItem('news_data', JSON.stringify(data));
+};
 
 const addButton = getById('submit-btn');
 addButton.onclick = onSubmitPress;
