@@ -23,26 +23,31 @@ const feedbackTemplate = (name, text, date, time) => `
     <div class="divider"></div>
 `
 
-const addDataRaedToStorage = (online) => {
-  if (isOnline()) return;
-  const data = localStorage.getItem('feedbacks-data');
+const addDataReadToStorage = (online) => {
+  const data = localStorage.getItem('comments');
+
+  console.log('Reading from local storage');
 
   if (!data) {
     console.log('No local data available');
   } else {
-    JSON.parse(data).forEach(() => {
+    JSON.parse(data).forEach(({name, text, date, time }) => {
+        console.log(name, text, date, time);
         $('#container').prepend(
-        feedbackTemplate(title, text, date, time),
+        feedbackTemplate(name, text, date, time),
         );
     });
   }
+
+
+  localStorage.removeItem('comments');
 }
 
-const writeLocally = (obj) => {
-  const item = localStorage.getItem('feedbacks-data')
+const addToLocal = (obj) => {
+  const item = localStorage.getItem('comments')
   let data = item ? JSON.parse(item) : [];
   data.push(obj);
-  localStorage.setItem('feedbacks-data', JSON.stringify(data));
+  localStorage.setItem('comments', JSON.stringify(data));
 }
 
 const onSubmitPress = (e) => {
@@ -55,11 +60,7 @@ const onSubmitPress = (e) => {
 
   const date = new Date();
 
-  $('#container').prepend(
-    feedbackTemplate(namearea.value, textarea.value, date.toLocaleDateString(), date.toLocaleTimeString())
-  );
-
-  writeLocally({
+  addToLocal({
     name: namearea.value,
     text: textarea.value,
     date: date.toLocaleDateString(),
@@ -74,12 +75,11 @@ const onSubmitPress = (e) => {
 }
 
 const onOnline = () => {
-  addDataRaedToStorage();
+  addDataReadToStorage();
   console.log('Status: online, upload data to server ...');
 }
 
 const onOffline = () => {
-  addDataRaedToStorage();
   console.log('Missing connection, switching to offline mode ...');
 }
 
@@ -89,4 +89,4 @@ const addButton = getById('submitBtn');
 addButton.onclick = onSubmitPress;
 window.addEventListener('online', onOnline);
 window.addEventListener('offline', onOffline);
-window.addEventListener('DOMContentLoaded', addDataRaedToStorage);
+window.addEventListener('DOMContentLoaded', addDataReadToStorage);

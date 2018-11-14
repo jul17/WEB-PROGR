@@ -13,10 +13,10 @@ const itemTemplate = (title, body, picture) => `
 `
 
 
-const initAndRenderData = () => {
+const addDataReadToStorage = (online) => {
   const data = localStorage.getItem('news_data');
 
-  if (isOnline()) return;
+  console.log('Reading from local storage');
 
   if (!data) {
     console.log('No available local data found');
@@ -28,7 +28,6 @@ const initAndRenderData = () => {
         );
     });
   }
-
 }
 
 const onOnline = () => {
@@ -41,5 +40,5 @@ const onOffline = () => {
 
 window.addEventListener('online', onOnline);
 window.addEventListener('offline', onOffline);
-window.addEventListener('DOMContentLoaded', initAndRenderData);
+window.addEventListener('DOMContentLoaded', addDataReadToStorage);
 
