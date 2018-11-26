@@ -17,8 +17,8 @@ class Feedback{
   constructor(name, text, date, time){
     this.name = name;
     this.text = text;
-    this.date = date;
-    this.time = time;
+    this.date = date; = time
+    this.time;
   }
 }
 
@@ -137,9 +137,9 @@ const onSubmitPress = (e) => {
   var feedback = new Feedback(namearea.value, textarea.value, date.toLocaleDateString(), date.toLocaleTimeString());
   
   if(navigator.onLine){
-  $('#container').prepend(
-    feedbackTemplate(feedback)
-  );
+     $('#container').prepend(
+      feedbackTemplate(feedback)
+     );
   }
 
   addToLocal(feedback);
