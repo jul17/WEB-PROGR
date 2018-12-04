@@ -8,35 +8,6 @@ window.isOnline = () => this.navigator.onLine;
 
 const getById = id => document.getElementById(id);
 
-// REST
-class ServerService {
-  async sendToServer(data) {
-    try {
-      await fetch('/news', {
-        method: 'post',
-        headers: {
-          'Content-type': 'application/json'
-        },
-        body: JSON.stringify(data),
-      });
-    } catch (error) {
-      console.error('Cannot fetch data: ', error);
-    }
-  }
-
- async getFromServer() {
-    try {
-      const data = await fetch('/news/all');
-      return data.text();
-    } catch (error) {
-      console.error('Cannot fetch data: ', error);
-    }
-  }
-}
-//
-
-const service = new ServerService();
-
 const input_form = getById('addPicture');
 const newsForm = getById('newsForm');
 const text = getById('text');
@@ -52,7 +23,7 @@ class News{
   }
 }
 
-const onSubmitPress = async (e) => {
+const onSubmitPress = (e) => {
   e.preventDefault();
 
   const isValid = (text.value.length > 0 && caption.value.length > 0);
@@ -63,12 +34,13 @@ const onSubmitPress = async (e) => {
 
   var news = new News(caption.value, text.value, fileInput.value);
 
-  await service.sendToServer({
-    title: caption.value,
-    body: text.value,
-    picture: fileInput.value,
-  });
+  if (!isOnline()) {
+    writeLocally(news);
+  } else {
+    console.log('Емуляція запиту до сервера...');
+  }
 
+  
   input_form.classList.remove('was-validated');
   newsForm.classList.remove('was-validated');
   input_form.reset();
