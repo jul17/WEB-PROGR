@@ -8,6 +8,33 @@ window.isOnline = () => this.navigator.onLine;
 
 const getById = id => document.getElementById(id);
 
+// REST
+class ServerService {
+  async sendToServer(data) {
+    try {
+      await fetch('/feedbacks', {
+        method: 'post',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(data),
+      });
+    } catch (error) {
+      console.error('Cannot fetch data: ', error);
+    }
+  }
+
+ async getFromServer() {
+    try {
+      const data = await fetch('/feedbacks/all');
+      return data.text();
+    } catch (error) {
+      console.error('Cannot fetch data: ', error);
+    }
+  }
+}
+//
+
 const feedbackContainer = getById('container');
 const form = getById('form_appeal');
 const namearea = getById('name');
@@ -17,8 +44,8 @@ class Feedback{
   constructor(name, text, date, time){
     this.name = name;
     this.text = text;
-    this.date = date; = time
-    this.time;
+    this.date = date; 
+    this.time= time;
   }
 }
 
@@ -43,53 +70,21 @@ return`
 `
 } 
 
-const addDataReadToStorage = (online) => {
-  if(useLocalStorage){
-      if (isOnline()) return;
-      const data = localStorage.getItem('feedbacks-data');
+//REST
+const service = new ServerService();
 
-  console.log('Reading from local storage');
+const initAndRenderData = async () => {
+  const items = await service.getFromServer();
+  console.log(items);
 
-  if (!data) {
-    console.log('No local data available');
-  } else {
-    JSON.parse(data).forEach(({name, text, date, time }) => {
-        console.log(name, text, date, time);
-        $('#container').prepend(
-        feedbackTemplate(name, text, date, time),
-        );
-      });
-    }
-  }  else {
-  var openDB = indexedDB.open("feedbacks-data", 1);
-      openDB.onupgradeneeded = function() {
-          var db = openDB.result;
-          var store = db.createObjectStore("feedbacks", {keyPath: "name"});
-          store.createIndex("name", "name", { unique: false });
-          store.createIndex("text", "text", { unique: false });
-          store.createIndex("date", "date", { unique: false });
-          store.createIndex("time", "time", { unique: false });
-      }
-      openDB.onsuccess = function(event) {
-        var db = openDB.result;
-        var tx = db.transaction("feedbacks", "readwrite");
-          var store = tx.objectStore("feedbacks");
-          store.openCursor().onsuccess = function(event) {
-          var cursor = event.target.result;
+  const itemsStringified = JSON.stringify(items);
 
-          if (cursor) {
-            var tempFeed = new Feedback(cursor.value.name, cursor.value.text, cursor.value.date, cursor.value.time);
-              console.log(tempFeed);
-              //feedbacks.push(tempFeed);
-              $('#container').prepend(feedbackTemplate(tempFeed));
-              cursor.continue();
-          }
-        };
-          tx.oncomplete = function(){
-            db.close();
-          }
-      }
-  }
+  JSON.parse(items).forEach(({ name, text, date, time }) => {
+    var tempFeedback = new Feedback(name, text, date, time);
+    $('#container').prepend(
+       feedbackTemplate(tempFeedback),
+         );
+   });
 }
 
 function addToLocal(feedback) {
@@ -125,7 +120,7 @@ function addToLocal(feedback) {
 }
 
 
-const onSubmitPress = (e) => {
+const onSubmitPress = async (e) => {
   e.preventDefault();
 
   const isValid = (textarea.value.length > 0 && namearea.value.length > 0);
@@ -134,20 +129,29 @@ const onSubmitPress = (e) => {
   if (!isValid) return;
 
   const date = new Date();
+
   var feedback = new Feedback(namearea.value, textarea.value, date.toLocaleDateString(), date.toLocaleTimeString());
   
-  if(navigator.onLine){
-     $('#container').prepend(
-      feedbackTemplate(feedback)
-     );
-  }
+  // $('#container').prepend(
+  //   feedbackTemplate(feedback)
+  // );
 
-  addToLocal(feedback);
+  // addToLocal(feedback);
+
+  await service.sendToServer({
+    name: namearea.value,
+    text: textarea.value,
+    date: date.toLocaleDateString(),
+    time: date.toLocaleTimeString(),
+  });
 
   form.classList.remove('was-validated');
   namearea.value = '';
   textarea.value = '';
- 
+  alert("Send to mongoDB...");
+  setTimeout(function(){
+    initAndRenderData();
+  }, 100);
 }
 
 const onOnline = () => {
@@ -165,4 +169,4 @@ const addButton = getById('submitBtn');
 addButton.onclick = onSubmitPress;
 window.addEventListener('online', onOnline);
 window.addEventListener('offline', onOffline);
-window.addEventListener('DOMContentLoaded', addDataReadToStorage);
+window.addEventListener('DOMContentLoaded', initAndRenderData);
